@@ -6,19 +6,39 @@
 
 Группа: М4152
 
-Задача: Многоклассовая классификация (распознавание предметов одежды)
+Задача: Детекция разлива металлических циллиндров
 
-Датасет: Fashion-MNIST
+Архитектура - U-Net autoencoder
 
-Классы:
+### Параметры
 
-- T-shirt/top
-- Trouser
-- Pullover
-- Dress
-- Coat
-- Sandal
-- Shirt
-- Sneaker
-- Bag
-- Ankle boot
+Оптимизатор - AdamW
+
+Loss функция: MSE
+
+Число эпох - 20
+
+### Аугментация
+
+- Resize((32, 48))
+
+- CenterCrop((32, 32))
+
+- RandomHorizontalFlip()
+
+- RandomVerticalFlip()
+
+
+### Метрики
+
+True positive rate: 0.9922
+
+True negative rate: 0.9279
+
+Loss на обучающей выборке:
+
+![Alt Text](images/train_losses.png)
+
+Heatmap:
+
+![Alt Text](images/heatmap.png)

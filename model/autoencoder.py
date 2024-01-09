@@ -66,14 +66,12 @@ class Encoder(nn.Module):
         super(Encoder, self).__init__()
         self.block1 = Block(1, 16, 'down')
         self.block2 = Block(16, 32, 'down')
-        self.block3 = Block(32, 64, 'down')
 
     def forward(self, inputs):
         block1, concat1 = self.block1(inputs)
         block2, concat2 = self.block2(block1)
-        block3, concat3 = self.block3(block2)
-        concats = [concat1, concat2, concat3]
-        return block3, concats
+        concats = [concat1, concat2]
+        return block2, concats
 
 
 class Decoder(nn.Module):
@@ -83,15 +81,13 @@ class Decoder(nn.Module):
 
     def __init__(self):
         super(Decoder, self).__init__()
-        self.block1 = Block(128, 64, 'up')
-        self.block2 = Block(64, 32, 'up')
-        self.block3 = Block(32, 16, 'out')
+        self.block1 = Block(64, 32, 'up')
+        self.block2 = Block(32, 16, 'out')
 
     def forward(self, inputs, concats):
         block1 = self.block1(inputs, concats[-1])
         block2 = self.block2(block1, concats[-2])
-        block3 = self.block3(block2, concats[-3])
-        return block3
+        return block2
 
 
 class Autoencoder(nn.Module):
@@ -105,13 +101,13 @@ class Autoencoder(nn.Module):
         self.encoder = Encoder()
         self.decoder = Decoder()
         self.bottleneck = nn.Sequential(
-            nn.Conv2d(64, 128, 3, 1, 1),
-            nn.BatchNorm2d(128),
+            nn.Conv2d(32, 64, 3, 1, 1),
+            nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.Conv2d(128, 128, 3, 1, 1),
-            nn.BatchNorm2d(128),
+            nn.Conv2d(64, 64, 3, 1, 1),
+            nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.ConvTranspose2d(128, 64, 2, 2, 0)
+            nn.ConvTranspose2d(64, 32, 2, 2, 0)
         )
 
     def forward(self, inputs):

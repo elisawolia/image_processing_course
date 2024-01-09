@@ -7,7 +7,7 @@ class AlexNet(nn.Module):
         super().__init__()
         self.encoder = encoder
         self.conv1 = nn.Sequential(
-            nn.Conv2d(in_channels=1, out_channels=96, kernel_size=11, stride=4, padding=0),
+            nn.Conv2d(in_channels=32, out_channels=96, kernel_size=4, stride=2, padding=1),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=3, stride=2)
         )
@@ -30,7 +30,7 @@ class AlexNet(nn.Module):
             nn.MaxPool2d(3, 2)
         )
 
-        self.fc1 = nn.Linear(256 * 6 * 6, 4096)
+        self.fc1 = nn.Linear(256, 4096)
         self.fc2 = nn.Linear(4096, 4096)
         self.fc3 = nn.Linear(4096, 10)
     

@@ -3,8 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class AlexNet(nn.Module):   
-    def __init__(self):
+    def __init__(self, encoder):
         super().__init__()
+        self.encoder = encoder
         self.conv1 = nn.Sequential(
             nn.Conv2d(in_channels=1, out_channels=96, kernel_size=11, stride=4, padding=0),
             nn.ReLU(),
@@ -34,7 +35,8 @@ class AlexNet(nn.Module):
         self.fc3 = nn.Linear(4096, 10)
     
     def forward(self, x):
-        out = self.conv1(x)
+        out, _ = self.encoder(x)
+        out = self.conv1(out)
         out = self.conv2(out)
         out = self.conv3(out)
         out = self.conv4(out)

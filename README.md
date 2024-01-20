@@ -93,5 +93,35 @@ Accuracy на валидационной выборке с feature extractor 100
 
 ![Alt Text](img/example_pretrained.png)
 
-Вывод первого эксперимента: 
+Эксперимент 50%:
+
+Loss с feature extractor 50%:
+
+![Alt Text](img/train_losses_50.png)
+
+Loss на валидационной выборке с feature extractor 50%:
+
+![Alt Text](img/valid_losses_50.png)
+
+Accuracy на валидационной выборке с feature extractor 50%:
+
+![Alt Text](img/valid_acc_50.png)
+
+Эксперимент 10%:
+
+Loss с feature extractor 10%:
+
+![Alt Text](img/train_losses_10.png)
+
+Loss на валидационной выборке с feature extractor 10%:
+
+![Alt Text](img/valid_losses_10.png)
+
+Accuracy на валидационной выборке с feature extractor 10%:
+
+![Alt Text](img/valid_acc_10.png)
+
+
+Вывод: 
 Модель с предобученным энкодером не дала сильно лучший результат (результат лишь немного лучше), однако кажется, что с предобученным энкодером модель обучается немного быстрее.  
+Результаты с обученным на 100% данных энкомедорм во много раз лучше, чем те, которые обучены на части данных.
